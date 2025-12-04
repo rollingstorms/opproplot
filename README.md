@@ -2,6 +2,8 @@
 
 Opproplot is an operating profile plot for binary classifiers: a single figure that shows score distributions by class plus TPR/FPR/Accuracy as you move the decision threshold. It makes threshold selection, ROC/PR intuition, and calibration discussion concrete in one view.
 
+Docs: https://rollingstorms.github.io/opproplot
+
 ![Opproplot hero](docs/assets/opproplot_hero.png)
 
 **What it is:** Opproplot visualizes the family of decision rules h_t(x) = 1{f(x) >= t} and their induced operating characteristics (TPR, FPR, Accuracy), alongside the empirical score distributions p(s | Y=1) and p(s | Y=0).

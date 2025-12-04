@@ -110,7 +110,6 @@ def compute_operating_profile(
     if P == 0 or N == 0:
         raise ValueError("Both positive and negative examples are required.")
 
-    FN_cum = P - TP_cum
     TN_cum = N - FP_cum
 
     # Map bin midpoints to indices (thresholds);
@@ -122,7 +121,6 @@ def compute_operating_profile(
 
     TP = TP_cum[idx]
     FP = FP_cum[idx]
-    FN = FN_cum[idx]
     TN = TN_cum[idx]
 
     eps = 1e-12

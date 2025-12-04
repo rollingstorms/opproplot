@@ -11,6 +11,10 @@ profile = compute_operating_profile(y_true, y_score, bins=40, score_range=(0, 1)
 - `y_score`: array-like of shape (n_samples,), predicted scores or probabilities.
 - `bins`: number of score bins (default 40).
 - `score_range`: tuple or None. If None, uses min/max of scores.
+- `show_key`: display combined legend for bars and lines (default True).
+- `key_location`: `"inside"` (axis legend) or `"outside"` (fig-level, right dock).
+- `show_grid`: draw a background grid on the metric axis (default False).
+- `grid_kwargs`: dict passed to `ax_metric.grid`, e.g., `{"alpha": 0.2, "linestyle": "--"}`.
 
 Returns an `OperatingProfile` dataclass with:
 - `edges`, `mids`, `pos_hist`, `neg_hist`, `tpr`, `fpr`, `accuracy`.

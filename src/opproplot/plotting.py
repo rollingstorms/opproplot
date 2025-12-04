@@ -4,7 +4,7 @@ from typing import Optional
 
 import matplotlib.pyplot as plt
 
-from .core import OperatingProfile, compute_operating_profile
+from .core import compute_operating_profile
 
 
 def operating_profile_plot(
@@ -13,6 +13,10 @@ def operating_profile_plot(
     bins: int = 40,
     score_range=None,
     show_accuracy: bool = True,
+    show_key: bool = True,
+    key_location: str = "inside",
+    show_grid: bool = False,
+    grid_kwargs: Optional[dict] = None,
     ax: Optional[plt.Axes] = None,
 ):
     """
@@ -30,6 +34,16 @@ def operating_profile_plot(
         Range for the score histogram. If None, inferred from scores.
     show_accuracy : bool, default=True
         Whether to plot accuracy as an additional dashed curve.
+    show_key : bool, default=True
+        Whether to display a combined key/legend for bars and metric lines.
+    key_location : {"inside", "outside"}, default="inside"
+        Placement of the key. "inside" uses a standard axis legend; "outside"
+        docks the key to the right via fig.legend.
+    show_grid : bool, default=False
+        Whether to draw a background grid aligned to the metric axis.
+    grid_kwargs : dict or None, default=None
+        Passed to `ax_metric.grid`; useful keys include `alpha`, `color`,
+        `linestyle`, and `linewidth`.
     ax : matplotlib.axes.Axes or None, default=None
         Axis to plot on. If None, a new figure and axis are created.
 
@@ -81,8 +95,33 @@ def operating_profile_plot(
 
     ax_metric.set_ylabel("Metric value")
 
-    ax_hist.legend(loc="upper left")
-    ax_metric.legend(loc="lower right")
+    if show_key:
+        color_handles = [
+            ax_hist.containers[0].patches[0],
+            ax_hist.containers[1].patches[0],
+        ]
+        color_labels = ["Negatives", "Positives"]
+
+        line_handles = ax_metric.lines[: 3 if show_accuracy else 2]
+        line_labels = ["TPR (Recall)", "FPR"] + (["Accuracy"] if show_accuracy else [])
+
+        handles = color_handles + line_handles
+        labels = color_labels + line_labels
+
+        if key_location == "outside":
+            fig.legend(
+                handles,
+                labels,
+                loc="center left",
+                bbox_to_anchor=(1.02, 0.5),
+                frameon=False,
+            )
+        else:
+            ax_metric.legend(handles, labels, loc="lower right")
+
+    if show_grid:
+        ax_metric.grid(True, **(grid_kwargs or {"alpha": 0.2, "linestyle": "--"}))
+
     ax_hist.set_title("Opproplot: Operating Profile")
 
     fig.tight_layout()
