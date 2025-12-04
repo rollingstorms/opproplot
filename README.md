@@ -6,6 +6,20 @@ Docs: https://rollingstorms.github.io/opproplot
 
 ![Opproplot hero](docs/assets/opproplot_hero.png)
 
+**What is an Operating Profile Plot?**
+
+An Operating Profile Plot (Opproplot) is a unified visualization for binary classifiers that shows how a model behaves across every possible decision threshold. It combines:
+- a stacked histogram of predicted scores for positives vs. negatives
+- threshold-dependent performance metrics such as Recall (TPR) and False Positive Rate (FPR)
+- computed at the midpoint of each score bin, treating each as a candidate threshold
+
+This creates a complete operating profile of the model in a single view — letting you see where the model is confident, where the classes overlap, and how performance changes as you move the threshold.
+
+Rather than switching between ROC curves, PR curves, histograms, and calibration plots, Opproplot places the score distribution and the operating characteristics on the same axis, making it easy to:
+- identify thresholds with optimal trade-offs
+- diagnose where errors occur in score space
+- communicate model quality in an interpretable, visual way
+
 **What it is:** Opproplot visualizes the family of decision rules h_t(x) = 1{f(x) >= t} and their induced operating characteristics (TPR, FPR, Accuracy), alongside the empirical score distributions p(s | Y=1) and p(s | Y=0).
 
 **Why it matters:** You see where positives and negatives sit in score space, how recall and false positives trade off at every cutoff, and where accuracy peaks—no context-switching between ROC curves, confusion matrices, and histograms.
