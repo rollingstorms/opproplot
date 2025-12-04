@@ -1,0 +1,59 @@
+# opproplot
+
+Opproplot is an operating profile plot for binary classifiers: a single figure that shows score distributions by class plus TPR/FPR/Accuracy as you move the decision threshold. It makes threshold selection, ROC/PR intuition, and calibration discussion concrete in one view.
+
+**What it is:** Opproplot visualizes the family of decision rules h_t(x) = 1{f(x) >= t} and their induced operating characteristics (TPR, FPR, Accuracy), alongside the empirical score distributions p(s | Y=1) and p(s | Y=0).
+
+**Why it matters:** You see where positives and negatives sit in score space, how recall and false positives trade off at every cutoff, and where accuracy peaks—no context-switching between ROC curves, confusion matrices, and histograms.
+
+**When to use it:** model validation, stakeholder reviews, threshold tuning for production alerting, class-imbalance checks, and calibration audits.
+
+## Installation
+
+From the repo root:
+
+```bash
+pip install -e .
+```
+
+## Quickstart
+
+```python
+import numpy as np
+from opproplot import operating_profile_plot
+
+rng = np.random.default_rng(0)
+y_true = rng.integers(0, 2, size=5000)
+scores = rng.random(size=5000)
+
+fig, ax_hist, ax_metric = operating_profile_plot(y_true, scores, bins=30)
+```
+
+The resulting operating profile lets you see where positives and negatives concentrate in score space, how recall and false positive rate trade off as you move the threshold, and where accuracy peaks. It is a single, interpretable view of all possible thresholds for a scoring model.
+
+![Opproplot example](docs/assets/opproplot_example.png)
+
+## Project layout
+
+- Package code lives in `src/opproplot`.
+- Tests live in `tests/`.
+- Documentation for GitHub Pages lives in `docs/` (see below).
+
+## Documentation site
+
+Enable GitHub Pages with the `docs/` folder as the root. The scaffold includes:
+
+- `docs/index.md`: landing page with value proposition and a hero plot.
+- `docs/getting_started.md`: install, notebook walkthrough, common models.
+- `docs/theory.md`: decision rules, distributions, and metric integrals.
+- `docs/examples.md`: real datasets and comparisons.
+- `docs/api.md`: core functions and parameters.
+- `docs/roadmap.md`: features and status.
+
+Fill in each page as you iterate; the structure is ready to publish.
+
+## Testing
+
+```bash
+pytest
+```
