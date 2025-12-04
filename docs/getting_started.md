@@ -27,7 +27,9 @@ fig, ax_hist, ax_metric = operating_profile_plot(y_true, scores, bins=30)
 - Right axis: TPR, FPR, and Accuracy evaluated at each bin midpoint threshold.
 - Choose thresholds where TPR/FPR trade-offs make sense for your application.
 
-## With scikit-learn (real example)
+![Opproplot simulated example](assets/opproplot_example.png)
+
+## Detailed example (scikit-learn)
 
 ```python
 from sklearn.datasets import load_breast_cancer
@@ -47,6 +49,8 @@ y_score = clf.predict_proba(X_test)[:, 1]
 fig, ax_hist, ax_metric = operating_profile_plot(y_test, y_score, bins=30)
 ax_hist.set_title("Breast cancer classifier operating profile")
 ```
+
+![Opproplot breast cancer example](assets/opproplot_breast_cancer.png)
 
 Pattern applies to other models:
 

@@ -2,6 +2,8 @@
 
 A compact operating profile plot for binary classifiers: stacked score histograms by class plus TPR/FPR/Accuracy curves at bin-midpoint thresholds. One view to understand every possible cutoff.
 
+![Opproplot hero](assets/opproplot_hero.png)
+
 ## Why Opproplot
 
 - See score separation between classes directly.
@@ -26,6 +28,12 @@ scores = rng.random(size=5000)
 
 operating_profile_plot(y_true, scores, bins=30)
 ```
+
+![Opproplot simulated example](assets/opproplot_example.png)
+
+## Detailed example (scikit-learn)
+
+![Opproplot breast cancer](assets/opproplot_breast_cancer.png)
 
 ## Learn more
 

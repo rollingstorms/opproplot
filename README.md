@@ -2,6 +2,8 @@
 
 Opproplot is an operating profile plot for binary classifiers: a single figure that shows score distributions by class plus TPR/FPR/Accuracy as you move the decision threshold. It makes threshold selection, ROC/PR intuition, and calibration discussion concrete in one view.
 
+![Opproplot hero](docs/assets/opproplot_hero.png)
+
 **What it is:** Opproplot visualizes the family of decision rules h_t(x) = 1{f(x) >= t} and their induced operating characteristics (TPR, FPR, Accuracy), alongside the empirical score distributions p(s | Y=1) and p(s | Y=0).
 
 **Why it matters:** You see where positives and negatives sit in score space, how recall and false positives trade off at every cutoff, and where accuracy peaks—no context-switching between ROC curves, confusion matrices, and histograms.
@@ -31,7 +33,28 @@ fig, ax_hist, ax_metric = operating_profile_plot(y_true, scores, bins=30)
 
 The resulting operating profile lets you see where positives and negatives concentrate in score space, how recall and false positive rate trade off as you move the threshold, and where accuracy peaks. It is a single, interpretable view of all possible thresholds for a scoring model.
 
-![Opproplot example](docs/assets/opproplot_example.png)
+![Opproplot simulated example](docs/assets/opproplot_example.png)
+
+## Detailed example (scikit-learn)
+
+```python
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+data = load_breast_cancer()
+X_train, X_test, y_train, y_test = train_test_split(
+    data.data, data.target, test_size=0.25, random_state=0, stratify=data.target
+)
+
+clf = LogisticRegression(max_iter=1000)
+clf.fit(X_train, y_train)
+
+y_score = clf.predict_proba(X_test)[:, 1]
+operating_profile_plot(y_test, y_score, bins=30)
+```
+
+![Opproplot breast cancer example](docs/assets/opproplot_breast_cancer.png)
 
 ## Project layout
 
