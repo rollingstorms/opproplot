@@ -7,7 +7,6 @@ Creates:
 - docs/assets/opproplot_breast_cancer.png
 """
 
-import os
 from pathlib import Path
 
 import matplotlib
@@ -20,7 +19,6 @@ from sklearn.linear_model import LogisticRegression  # noqa: E402
 from sklearn.model_selection import train_test_split  # noqa: E402
 
 from opproplot import operating_profile_plot  # noqa: E402
-
 
 ASSETS_DIR = Path("docs/assets")
 
@@ -56,7 +54,12 @@ def generate_hero() -> None:
 
     fig.set_size_inches(4.6, 2.4)
     fig.tight_layout(pad=0.4)
-    fig.savefig(ASSETS_DIR / "opproplot_hero.png", dpi=220, transparent=True, bbox_inches="tight")
+    fig.savefig(
+        ASSETS_DIR / "opproplot_hero.png",
+        dpi=220,
+        transparent=True,
+        bbox_inches="tight",
+    )
     plt.close(fig)
 
 
