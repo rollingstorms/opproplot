@@ -17,6 +17,7 @@ def operating_profile_plot(
     key_location: str = "inside",
     show_grid: bool = False,
     grid_kwargs: Optional[dict] = None,
+    title: Optional[str] = None,
     ax: Optional[plt.Axes] = None,
 ):
     """
@@ -44,6 +45,8 @@ def operating_profile_plot(
     grid_kwargs : dict or None, default=None
         Passed to `ax_metric.grid`; useful keys include `alpha`, `color`,
         `linestyle`, and `linewidth`.
+    title : str or None, default=None
+        Title for the histogram axis. If None, uses "Opproplot: Operating Profile".
     ax : matplotlib.axes.Axes or None, default=None
         Axis to plot on. If None, a new figure and axis are created.
 
@@ -122,7 +125,9 @@ def operating_profile_plot(
     if show_grid:
         ax_metric.grid(True, **(grid_kwargs or {"alpha": 0.2, "linestyle": "--"}))
 
-    ax_hist.set_title("Opproplot: Operating Profile")
+    if title is None:
+        title = "Opproplot: Operating Profile"
+    ax_hist.set_title(title)
 
     fig.tight_layout()
     return fig, ax_hist, ax_metric

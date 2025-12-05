@@ -1,5 +1,7 @@
 # Opproplot
 
+<u>OP</u>erating <u>PRO</u>file <u>PLOT</u>
+
 A compact operating profile plot for binary classifiers: stacked score histograms by class plus TPR/FPR/Accuracy curves at bin-midpoint thresholds. One view to understand every possible cutoff.
 
 ![Opproplot hero](assets/opproplot_hero.png)
@@ -12,6 +14,8 @@ An Operating Profile Plot (Opproplot) is a unified visualization for binary clas
 - computed at the midpoint of each score bin, treating each as a candidate threshold
 
 This creates a complete operating profile of the model in a single view — letting you see where the model is confident, where the classes overlap, and how performance changes as you move the threshold.
+
+It is a compact, multidimensional readout of model behavior: score distribution by class plus operating curves (TPR/FPR/accuracy) on the same axis. Comparing profiles across models or datasets shows whether a model separates classes cleanly, where overlap drives errors, and how threshold choices shift business metrics.
 
 Rather than switching between ROC curves, PR curves, histograms, and calibration plots, Opproplot places the score distribution and the operating characteristics on the same axis, making it easy to:
 - identify thresholds with optimal trade-offs

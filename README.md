@@ -6,6 +6,8 @@ Docs: https://rollingstorms.github.io/opproplot
 
 ![Opproplot hero](docs/assets/opproplot_hero.png)
 
+<u>OP</u>erating <u>PRO</u>file <u>PLOT</u> ← Opproplot spelled out.
+
 **What is an Operating Profile Plot?**
 
 An Operating Profile Plot (Opproplot) is a unified visualization for binary classifiers that shows how a model behaves across every possible decision threshold. It combines:
@@ -14,6 +16,8 @@ An Operating Profile Plot (Opproplot) is a unified visualization for binary clas
 - computed at the midpoint of each score bin, treating each as a candidate threshold
 
 This creates a complete operating profile of the model in a single view — letting you see where the model is confident, where the classes overlap, and how performance changes as you move the threshold.
+
+It is a compact, multidimensional readout of model behavior: score distribution by class plus operating curves (TPR/FPR/accuracy) on the same axis. Comparing profiles across models or datasets shows whether a model separates classes cleanly, where overlap drives errors, and how threshold choices shift business metrics.
 
 Rather than switching between ROC curves, PR curves, histograms, and calibration plots, Opproplot places the score distribution and the operating characteristics on the same axis, making it easy to:
 - identify thresholds with optimal trade-offs
@@ -77,6 +81,7 @@ operating_profile_plot(y_test, y_score, bins=30)
 - Package code lives in `src/opproplot`.
 - Tests live in `tests/`.
 - Documentation for GitHub Pages lives in `docs/` (see below).
+- Regenerate doc images with `python scripts/generate_docs_images.py` (requires numpy, matplotlib, scikit-learn).
 
 ## Documentation site
 
